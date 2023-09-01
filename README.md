@@ -1,7 +1,8 @@
-# Docker PHP-FPM 8.2 & Nginx 1.24 on Alpine Linux
+# Docker PHP-FPM 8.2 & Nginx 1.24 on Alpine Linux, which is customised for Lavarel   
 Example PHP-FPM 8.2 & Nginx 1.24 container image for Docker, built on [Alpine Linux](https://www.alpinelinux.org/).
 
-Repository: https://github.com/TrafeX/docker-php-nginx
+Current Repository : https://github.com/pleungkh/php-nginx_4laravel
+Source Repository: https://github.com/TrafeX/docker-php-nginx
 
 
 * Built on the lightweight and secure Alpine Linux distribution
@@ -29,15 +30,27 @@ the best practices and is easy to understand and modify to your needs.
 
 ## Usage
 
+
+Build docker image from source,  create, start container  :
+
+    cd ./php-nginx_4laravel
+    docker build -t pleungkh/php-nginx .
+
+Build create, start container  :
+    docker create --name laravel.dv -p 80:8080 -v ~/laravel/myapp:/var/www/html pleungkh/php-nginx
+    docker start laravel.dv
+    # log into container
+    docker exec -i -t laravel.dv ash 
+
 Start the Docker container:
 
-    docker run -p 80:8080 trafex/php-nginx
+    docker run -p 80:8080 pleungkh/php-nginx
 
 See the PHP info on http://localhost, or the static html page on http://localhost/test.html
 
-Or mount your own code to be served by PHP-FPM & Nginx
+Or mount your own Laravel project source code to be served by PHP-FPM & Nginx
 
-    docker run -p 80:8080 -v ~/my-codebase:/var/www/html trafex/php-nginx
+    docker run -p 80:8080 -v ~/my-laravel-prj-path:/var/www/html pleungkh/php-nginx
 
 ## Configuration
 In [config/](config/) you'll find the default configuration files for Nginx, PHP and PHP-FPM.
@@ -45,15 +58,15 @@ If you want to extend or customize that you can do so by mounting a configuratio
 
 Nginx configuration:
 
-    docker run -v "`pwd`/nginx-server.conf:/etc/nginx/conf.d/server.conf" trafex/php-nginx
+    docker run -v "`pwd`/nginx-server.conf:/etc/nginx/conf.d/server.conf" pleungkh/php-nginx
 
 PHP configuration:
 
-    docker run -v "`pwd`/php-setting.ini:/etc/php82/conf.d/settings.ini" trafex/php-nginx
+    docker run -v "`pwd`/php-setting.ini:/etc/php82/conf.d/settings.ini" pleungkh/php-nginx
 
 PHP-FPM configuration:
 
-    docker run -v "`pwd`/php-fpm-settings.conf:/etc/php82/php-fpm.d/server.conf" trafex/php-nginx
+    docker run -v "`pwd`/php-fpm-settings.conf:/etc/php82/php-fpm.d/server.conf" pleungkh/php-nginx
 
 _Note; Because `-v` requires an absolute path I've added `pwd` in the example to return the absolute path to the current directory_
 
