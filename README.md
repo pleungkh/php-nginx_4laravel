@@ -77,3 +77,4 @@ To modify this container to your specific needs please see the following example
 * [Adding composer](docs/composer-support.md)
 * [Getting the real IP of the client behind a load balancer](docs/real-ip-behind-loadbalancer.md)
 * [Sending e-mails](docs/sending-emails.md)
+* [Quick Installation on PC/Mac](docs/quick_install.md)
